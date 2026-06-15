@@ -1,0 +1,33 @@
+Configuration Etherchannel at DS1;
+
+DS1(config)#interface range e0/2-3
+DS1(config-if-range)#shutdown
+DS1(config-if-range)#channel-group 2 mode active
+
+
+Configuration Trunk Port at DS1;
+DS1(config-if-range)# switchport trunk encapsulation dot1q
+DS1(config-if-range)# switchport mode trunk
+DS1(config-if-range)# switch trunk allow vlan 100-103
+DS1(config-if-range)# switchport nonegotiate
+DS1(config-if-range)# no shutdown
+DS1(config-if-range)# do write
+
+
+
+
+Configuration Etherchannel at AS1;
+AS1(config)#interface range e0/0-1
+AS1(config-if-range)#shutdown
+AS1(config-if-range)#channel-group 1 mode active
+
+
+Configuration Trunk Port at the AS1;
+AS1(config-if-range)# switchport trunk encapsulation dot1q
+AS1(config-if-range)# switchport mode trunk
+AS1(config-if-range)# switch trunk allow vlan 100-103
+AS1(config-if-range)# switchport nonegotiate
+AS1(config-if-range)# no shutdown
+AS1(config-if-range)# do write
+
+

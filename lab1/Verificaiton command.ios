@@ -1,0 +1,14 @@
+# do show etherchannel summary 
+
+# do show vlan brief 
+
+# do show vlan summary
+
+
+Verify Inter-VLAN Routing on a DS1;
+
+# do show ip interface brief | exclude unassigned
+
+# do show runnning-config | begin interface 
+
+

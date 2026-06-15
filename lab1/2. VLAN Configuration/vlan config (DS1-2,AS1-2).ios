@@ -1,0 +1,56 @@
+VLAN Configuration for DS1;
+
+DS1(config) vlan 100
+DS1(config-vlan)#name THOR
+DS1(config) vlan 101
+DS1(config-vlan)#name LOKI
+DS1(config) vlan 102
+DS1(config-vlan)#name ODIN
+DS1(config) vlan 103
+DS1(config-vlan)#name FRIGG
+DS1(config-vlan)#exit
+DS1(config)#vtp mode transparent
+
+
+VLAN Configuration for DS2;
+
+DS2(config) vlan 100
+DS2(config-vlan)#name THOR
+DS2(config) vlan 101
+DS2(config-vlan)#name LOKI
+DS2(config) vlan 102
+DS2(config-vlan)#name ODIN
+DS2(config) vlan 103
+DS2(config-vlan)#name FRIGG
+DS2(config-vlan)#exit
+DS2(config)#vtp mode transparent
+
+
+
+VLAN Configuration for AS1;
+
+AS1(config) vlan 100
+AS1(config-vlan)#name THOR
+AS1(config) vlan 101
+AS1(config-vlan)#name LOKI
+AS1(config) vlan 102
+AS1(config-vlan)#name ODIN
+AS1(config) vlan 103
+AS1(config-vlan)#name FRIGG
+AS1(config-vlan)#exit
+AS1(config)#vtp mode transparent
+
+
+
+VLAN Configuration for AS2;
+
+AS2(config) vlan 100
+AS2(config-vlan)#name THOR
+AS2(config) vlan 101
+AS2(config-vlan)#name LOKI
+AS2(config) vlan 102
+AS2(config-vlan)#name ODIN
+AS2(config) vlan 103
+AS2(config-vlan)#name FRIGG
+AS2(config-vlan)#exit
+AS2(config)#vtp mode transparent

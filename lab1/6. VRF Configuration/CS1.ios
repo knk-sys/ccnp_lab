@@ -1,0 +1,52 @@
+Configuration VRF for CS1;
+
+CS1(config)#vrf definition BUILDING1        
+CS1(config-vrf)#address-family ipv4
+CS1(config-vrf-af)#exit
+CS1(config-vrf)#exit
+
+CS1(config)#vrf definition BUILDING2
+CS1(config-vrf)#address-family ipv4
+CS1(config-vrf-af)#exit
+CS1(config-vrf)#exit
+
+
+Verify VRF Configuration:
+
+CS1#show vrf
+CS1#show running-config | section vrf
+CS1#show ip route vrf BUILDING1
+CS1#show ip route vrf BUILDING2
+
+
+# Before adding interfaces to VRF, ensure that the interfaces are not assigned to any other VRF or have any IP address configured. If they do, you may need to remove the existing configuration before proceeding.
+
+#  Need to take down the ip address on the interfaces before assigning them to the VRF, as the IP address will be associated with the VRF once the interface is added.
+
+
+Adding Interfaces e0/0 and e0/1 to VRF BUILDING1:
+
+CS1(config)#interface e0/0
+CS1(config-if)#vrf forwarding BUILDING1
+CS1(config-if)#ip address 10.0.255.1 255.255.252
+
+
+CS1(config)#interface e0/1
+CS1(config-if)#vrf forwarding BUILDING1
+CS1(config-if)#ip address 10.0.255.5 255.255.252
+
+
+
+CS1(config)#ip route vrf BUILDING1 10.0.0.0 255.255.255.0
+
+
+
+
+
+
+
+
+
+
+
+

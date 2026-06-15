@@ -1,0 +1,58 @@
+HSRP Configuraiton at DS1; 
+
+Configuration for VLAN 100 on DS1:
+
+DS1(config)#interface vlan 100                                                  # This command enters interface configuration mode for VLAN 100, which is the interface that will be configured for HSRP. VLAN 100 is typically used for management or user traffic in a network.
+DS1(config-if)#standby version 2                                                # This command sets the HSRP version to 2 for the interface. HSRP version 2 is used for IPv6 support and additional features. Version 1 is the original version and is still widely used, but version 2 offers improved functionality.
+DS1(config-if)#standby 100 ip 10.0.0.1                                          # This command configures the HSRP group number (100) and the virtual IP address (
+DS1(config-if)#standby 100 priority 200                                         # This command sets the priority for the HSRP group. The router with the highest priority will become the active router. In this case, a priority of 200 is set, which is higher than the default priority of 100, making this router more likely to become the active router.
+DS1(config-if)#standby 100 preempt                                              # This command allows the router to take over as the active router if it has a higher priority than the current active router. If preempt is not enabled, the router will not take over as the active router even if it has a higher priority.
+DS1(config-if)#standby 100 timers 1 3                                           # This command sets the HSRP timers. The first value (1) is the hello time, which is the interval at which the active router sends hello messages to the standby router. The second value (3) is the hold time, which is the time that the standby router waits without receiving a hello message before it assumes that the active router has failed and takes over as the active router.
+DS1(config-if)#standby 100 authentication md5 key-string cisco123               # This command configures MD5 authentication for the HSRP group. The key-string "cisco123" is used as the authentication key. This helps to secure the HSRP communication between routers and prevent unauthorized devices from participating in the HSRP group.    
+
+
+Configuration for VLAN 101 on DS1:
+
+DS1(config)#interface vlan 101
+DS1(config-if)#standby version 2
+DS1(config-if)#standby 101 ip 10.0.1.1 
+DS1(config-if)#standby 101 priority 200
+DS1(config-if)#standby 101 preempt
+DS1(config-if)#standby 101 timers 1 3
+DS1(config-if)#standby 101 authentication md5 key-string cisco123
+
+
+
+Configure HSRP for VLAN 102 on DS1:
+
+DS1(config)#interface vlan 102
+DS1(config-if)#standby version 2
+DS1(config-if)#standby 102 ip 10.0.2.1
+DS1(config-if)#standby 102 priority 150
+DS1(config-if)#standby 102 preempt 
+DS1(config-if)#standby 102 timers 1 3
+DS1(config-if)#standby 102 authentication md5 key-string cisco123   
+
+
+Configure HSRP for VLAN 103 on DS1:
+
+DS1(config)#interface vlan 103
+DS1(config-if)#standby version 2
+DS1(config-if)#standby 103 ip 10.0.3.1
+DS1(config-if)#standby 103 priority 150
+DS1(config-if)#standby 103 preempt
+DS1(config-if)#standby 103 timers 1 3
+DS1(config-if)#standby 103 authentication md5 key-string cisco123
+
+
+Verify HSRP Configuration:
+
+DS1#show standby brief
+DS1#do show standby vlan 100
+DS1#do show running-config interface vlan 100
+DS1#do show standby vlan 101
+DS1#do show running-config interface vlan 101
+DS1#do show standby vlan 102
+DS1#do show running-config interface vlan 102
+DS1#do show standby vlan 103
+DS1#do show running-config interface vlan 103

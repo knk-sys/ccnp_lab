@@ -1,0 +1,60 @@
+HSRP Configuraiton at DS2;
+
+Configuration for VLAN 100 on DS2:
+
+DS2(config)#interface vlan 100
+DS2(config-if)#standby version 2
+DS2(config-if)#standby 100 ip 10.0.0.1 
+DS2(config-if)#standby 100 priority 150
+DS2(config-if)#standby 100 preempt
+DS2(config-if)#standby 100 timers 1 3
+DS2(config-if)#standby 100 authentication md5 key-string cisco123
+
+
+Configuration for VLAN 101 on DS2:
+
+DS2(config)#interface vlan 101
+DS2(config-if)#standby version 2
+DS2(config-if)#standby 101 ip 10.0.1.1
+DS2(config-if)#standby 101 priority 150
+DS2(config-if)#standby 101 preempt
+DS2(config-if)#standby 101 timers 1 3
+DS2(config-if)#standby 101 authentication md5 key-string cisco123
+
+
+Configure HSRP for VLAN 102 on DS2:
+
+DS2(config)#interface vlan 102
+DS2(config-if)#standby version 2
+DS2(config-if)#standby 102 ip 10.0.2.1
+DS2(config-if)#standby 102 priority 200
+DS2(config-if)#standby 102 preempt
+DS2(config-if)#standby 102 timers 1 3
+DS2(config-if)#standby 102 authentication md5 key-string cisco123
+
+
+Configure HSRP for VLAN 103 on DS2:
+DS2(config)#interface vlan 103
+DS2(config-if)#standby version 2
+DS2(config-if)#standby 103 ip 10.0.3.1
+DS2(config-if)#standby 103 priority 200
+DS2(config-if)#standby 103 preempt
+DS2(config-if)#standby 103 timers 1 3
+DS2(config-if)#standby 103 authentication md5 key-string cisco123
+
+
+
+
+Verify HSRP Configuration:
+
+DS2#show standby brief
+DS2#do show standby vlan 100
+DS2#do show running-config interface vlan 100
+DS2#do show standby vlan 101
+DS2#do show running-config interface vlan 101
+DS2#do show standby vlan 102
+DS2#do show running-config interface vlan 102
+DS2#do show standby vlan 103
+DS2#do show running-config interface vlan 103
+ 
+

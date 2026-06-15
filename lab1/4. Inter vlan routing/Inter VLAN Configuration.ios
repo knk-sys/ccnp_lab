@@ -1,0 +1,58 @@
+Configuring Inter-VLAN Routing on a DS1;
+
+DS1(config)# ip routing
+DS1(config)interface vlan 100
+DS1(config-if)# ip address 10.0.0.2 255.255.255.0
+DS1(config-if)# no shutdown
+DS1(config)interface vlan 101
+DS1(config-if)# ip address 10.0.1.2 255.255.255.0
+DS1(config-if)# no shutdown
+DS1(config)interface vlan 102
+DS1(config-if)# ip address 10.0.2.2 255.255.255.0
+DS1(config-if)# no shutdown
+DS1(config)interface vlan 103
+DS1(config-if)# ip address 10.0.3.2 255.255.255.0
+DS1(config-if)# no shutdown
+
+
+Configure Inter-VLAN Routing on a DS2;
+
+DS2(config)# ip routing
+DS2(config)interface vlan 100
+DS2(config-if)# ip address 10.0.0.3 255.255.255.0
+DS2(config-if)# no shutdown
+DS2(config)interface vlan 101
+DS2(config-if)# ip address 10.0.1.3 255.255.255.0
+DS2(config-if)# no shutdown
+DS2(config)interface vlan 102
+DS2(config-if)# ip address 10.0.2.3 255.255.255.0
+DS2(config-if)# no shutdown
+DS2(config)interface vlan 103
+DS2(config-if)# ip address 10.0.3.3 255.255.255.0
+DS2(config-if)# no shutdown
+
+
+
+Verify Inter-VLAN Routing on a DS1;
+
+DS1# do show ip interface brief | exclude unassigned
+DS1# do show runnning-config | begin interface
+
+Verify Inter-VLAN Routing on a DS2;
+DS2# do show ip interface brief | exclude unassigned
+DS2# do show runnning-config | begin interface
+
+
+Verify to Ping from DS2 to DS1;
+DS2# do ping 10.0.0.2
+DS2# do ping 10.0.1.2
+DS2# do ping 10.0.2.2
+DS2# do ping 10.0.3.2 
+
+
+Verify to Ping from DS1 to DS2;
+DS1# do ping 10.0.0.3
+DS1# do ping 10.0.1.3
+DS1# do ping 10.0.2.3
+DS1# do ping 10.0.3.3
+

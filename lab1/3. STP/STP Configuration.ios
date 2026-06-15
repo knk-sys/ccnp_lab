@@ -1,0 +1,67 @@
+## DS1 must be Root Switch for the vlan 100-101
+
+## DS2 must be Root Switch for the vlan 102-103
+
+
+Configuration of Spanning Tree Protocol for DS1;
+
+DS1(config)#spanning-tree mode rapid-pvst
+DS1(config)#spanning-tree vlan 100-101 priority 4096
+DS1(config)#spanning-tree vlan 102-103 priority 8192
+
+
+
+Configuration of Spanning Tree Protocol for DS2;
+
+DS2(config)#spanning-tree mode rapid-pvst
+DS2(config)#spanning-tree vlan 100-101 priority 8192
+DS2(config)#spanning-tree vlan 102-103 priority 4096
+
+
+
+Configuration of Spanning Tree Protocol for AS1;
+
+AS1(config)#spanning-tree mode rapid-pvst
+AS1(config)#spanning-tree portfast edge bpduguard default
+AS1(config)#spanning-tree portfast edge default
+
+
+
+Configuration of Spanning Tree Protocol for AS2;
+
+AS2(config)#spanning-tree mode rapid-pvst
+AS2(config)#spanning-tree portfast edge bpduguard default
+AS2(config)#spanning-tree portfast edge default
+
+
+Configuration of Port Guard Features for DS1;
+
+DS1(config)#interface port-channel 1
+DS1(config-if)#spanning-tree guard root
+DS1(config)#interface port-channel 2
+DS1(config-if)#spanning-tree guard root
+DS1(config)#interface port-channel 3
+DS1(config-if)#spanning-tree guard root
+
+
+Configuration of Port Guard Features for DS2;
+DS2(config)#interface port-channel 1
+DS2(config-if)#spanning-tree guard root
+DS2(config)#interface port-channel 2
+DS2(config-if)#spanning-tree guard root
+DS2(config)#interface port-channel 3
+DS2(config-if)#spanning-tree guard root
+
+
+
+Verify Spanning Tree Protocol Configuration:
+DS1#show spanning-tree vlan 100-101
+DS1#show spanning-tree vlan 102-103
+
+
+DS2#show spanning-tree vlan 100-101
+DS2#show spanning-tree vlan 102-103
+
+AS1#show spanning-tree
+AS2#show spanning-tree
+
