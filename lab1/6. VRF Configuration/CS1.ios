@@ -1,3 +1,21 @@
+Set IP address at the DS1;
+
+DS1(config)# interface e1/2
+DS1(config-if)# no switchport
+DS1(config-if)# ip address 10.0.255.2 255.255.255.252 
+DS1(config-if)# do write
+
+
+
+Set IP address at the DS2;
+
+DS2(config)# interface e1/2
+DS2(config-if)# no switchport
+DS2(config-if)# ip address 10.0.255.6 255.255.255.252
+DS2(config-if)# do write
+
+
+
 Configuration VRF for CS1;
 
 CS1(config)#vrf definition BUILDING1        
@@ -21,7 +39,7 @@ CS1#show ip route vrf BUILDING2
 
 # Before adding interfaces to VRF, ensure that the interfaces are not assigned to any other VRF or have any IP address configured. If they do, you may need to remove the existing configuration before proceeding.
 
-#  Need to take down the ip address on the interfaces before assigning them to the VRF, as the IP address will be associated with the VRF once the interface is added.
+# Need to take down the ip address on the interfaces before assigning them to the VRF, as the IP address will be associated with the VRF once the interface is added.
 
 
 Adding Interfaces e0/0 and e0/1 to VRF BUILDING1:
@@ -31,13 +49,51 @@ CS1(config-if)#vrf forwarding BUILDING1
 CS1(config-if)#ip address 10.0.255.1 255.255.252
 
 
+Verfication;
+CS1(config-if)# do show ip interface brief | exclude unasigned
+CS1# show ip route BUILDING1
+
+
+
 CS1(config)#interface e0/1
 CS1(config-if)#vrf forwarding BUILDING1
 CS1(config-if)#ip address 10.0.255.5 255.255.252
 
 
+Verfication;
 
-CS1(config)#ip route vrf BUILDING1 10.0.0.0 255.255.255.0
+CS1(config-if)# do show ip interface brief | exclude unasigned
+CS1# show ip route BUILDING1
+
+
+
+Add Route in the VRF;
+
+CS1(config)# ip route vrf BUILDING1 10.0.0.0 255.255.255.0 10.0.255.2 name DS1
+CS1(config)# ip route vrf BUILDING1 10.0.1.0 255.255.255.0 10.0.255.2 name DS1
+
+CS1(config)# ip route vrf BUILDING1 10.0.0.0 255.255.255.0 10.0.255.6 name DS2 10   
+CS1(config)# ip route vrf BUILDING1 10.0.1.0 255.255.255.0 10.0.255.6 name DS2 10       #floating static router
+
+
+CS1(config)# ip route vrf BUILDING1 10.0.2.0 255.255.255.0 10.0.255.2 name DS2
+CS1(config)# ip route vrf BUILDING1 10.0.3.0 255.255.255.0 10.0.255.2 name DS2
+
+CS1(config)# ip route vrf BUILDING1 10.0.2.0 255.255.255.0 10.0.255.6 name DS1 10   
+CS1(config)# ip route vrf BUILDING1 10.0.3.0 255.255.255.0 10.0.255.6 name DS1 10 
+
+
+
+Verfication for route information;
+CS1(config)# do show running-config | se ip route
+
+
+
+
+
+
+
+
 
 
 
